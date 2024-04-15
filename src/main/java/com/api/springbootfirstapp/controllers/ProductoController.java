@@ -4,6 +4,7 @@ package com.api.springbootfirstapp.controllers;
 import com.api.springbootfirstapp.models.Producto;
 import com.api.springbootfirstapp.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class ProductoController {
     @PostMapping(value = "/get/producto")
     @ResponseBody
     public List<Producto> getProductoList(@RequestBody Producto producto){
+        var auth =  SecurityContextHolder.getContext().getAuthentication();
         List<Producto> productoList = productoService.getProductoList(producto);
 
         return productoList;
